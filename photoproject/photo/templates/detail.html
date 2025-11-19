@@ -13,10 +13,10 @@
                 {% if object.image2 %}
                 <p><img src="{{ object.image2.url }}"></img></p>
                 {% endif %}
-                {% comment %} {% if request.user == object.user %}
-                <form method="POST"> {% endcomment %}
-                {% comment %} <a href="{% url 'photo:photo_delete' object.pk %}" class="btn btn-primary my-2">削除する</a> {% endcomment %}
-                {% comment %} {% endif %} {% endcomment %}
+                {% if request.user == object.user %}
+                <form method="POST">
+                <a href="{% url 'photo:photo_delete' object.pk %}" class="btn btn-primary my-2">削除する</a>
+                {% endif %}
                 
             </dv>
         </dv>

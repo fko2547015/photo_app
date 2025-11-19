@@ -9,6 +9,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from .models import PhotoPost
 from django.views.generic import DetailView
+from django.views.generic import DeleteView
 
 class IndexView(ListView):
     template_name ='index.html'
@@ -56,3 +57,10 @@ class MypageView(ListView):
     def get_queryset(self):
         queryset = PhotoPost.objects.filter(user=self.request.user).order_by('-posted_at')
         return queryset
+    
+class PhotoDeleteView(DeleteView):
+    model = PhotoPost
+    template_name ='photo_delete.html'
+    success_url = reverse_lazy('photo:mypage')
+    def delete(self, request, *args, **kwargs):
+        return super().delete(request, *args, **kwargs)
